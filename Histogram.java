@@ -23,7 +23,7 @@ public class Histogram {
 	}
 	
 	public int getCount(String key){
-			return 0;
+		return 0;
 	}
 	
 	public void add(String key){
@@ -35,7 +35,7 @@ public class Histogram {
 	}
 	
 	public Entry contains(String key){
-			return null;
+		return null;
 	}
 
 	/*  
