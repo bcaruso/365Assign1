@@ -9,7 +9,7 @@
 public class Histogram {
 
 
-	private float loadFactor = .75;
+	private double loadFactor = .75;
 	private int numberOfEntries = 0;
 	private Entry[] histogram;
 	
