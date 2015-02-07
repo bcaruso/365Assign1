@@ -15,7 +15,7 @@ public class Entry {
 
 
 	public Entry (String k) {
-		key = k.lowerCase();
+		key = k.toLowerCase();
 		count = 0;
 		next = null;
 		hash = key.hashCode();	
