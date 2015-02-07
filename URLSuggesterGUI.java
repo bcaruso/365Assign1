@@ -44,11 +44,6 @@ public class URLSuggesterGUI {
 		urlBox.setColumns(30);
 		urlBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		urlBox.setMaximumSize(urlBox.getPreferredSize());
-		urlBox.addActionListener( new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				urlEntered(e);
-			}
-		});
 		content.add(urlBox);
 		
 		submit= new JButton("Submit");
@@ -61,7 +56,7 @@ public class URLSuggesterGUI {
 		
 		content.add(submit);
 		
-		suggestedURL = new JLabel();
+		suggestedURL = new JLabel("Suggested URL: ");
 		suggestedURL.setAlignmentX(Component.LEFT_ALIGNMENT);
 		content.add(suggestedURL);
 		
@@ -74,7 +69,7 @@ public class URLSuggesterGUI {
 	// Action Methods
 		
 	public static void submitClicked(ActionEvent e){
-		suggestedURL.setText("Submit Clicked");
+		suggestedURL.setText("Suggested URL: Submit Clicked");
 	}
 	
 }
