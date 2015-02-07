@@ -5,6 +5,10 @@
 *   Sets up GUI and Handles events.
 */
 
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+
 public class URLSuggesterGUI {
 
 	// GUI Components
