@@ -11,12 +11,12 @@ public class Entry {
 	private int hash;
 	private String key;	// KEY
 	private int count;	// VALUE
-	private Entry next;
+	public Entry next;
 
 
 	public Entry (String k) {
 		key = k.toLowerCase();
-		count = 0;
+		count = 1;
 		next = null;
 		hash = key.hashCode();	
 	}
@@ -31,13 +31,17 @@ public class Entry {
 		return count;
 	}
 	
+	public void incCount(){
+		// Increment Count
+		count++;
+	}
+	
 	public String getKey(){
 		// Returns key
 		return key;
 	}
 	
-	public Entry next(){
-		// Returns next entry
-		return next;
+	public void setNext(Entry e){
+		 next = e;
 	}
 }
