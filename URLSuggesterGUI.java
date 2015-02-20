@@ -8,21 +8,23 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.awt.Color;
+import java.net.URISyntaxException;
+import java.net.*;
+import java.io.IOException;
+
 
 public class URLSuggesterGUI {
 
 	// GUI Components
 		
-	public static JFrame frame;
-	public static JPanel content;
-	public static JLabel instructions;
-	public static JTextField urlBox;
-	public static JButton submit;
-	public static JLabel suggestedURL;
-
-	public URLSuggesterGUI(){
-	
-	}
+	private JFrame frame;
+	private JPanel content;
+	private JLabel instructions;
+	private JTextField urlBox;
+	private  JButton submit;
+	private  JLabel suggestedURLHeader;
+	private  JLabel suggestedURL;
 
 	public void createGUI(){
 	
@@ -41,7 +43,7 @@ public class URLSuggesterGUI {
 		content.add(instructions);
 		
 		urlBox= new JTextField("http://www.example.com");
-		urlBox.setColumns(30);
+		urlBox.setColumns(35);
 		urlBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		urlBox.setMaximumSize(urlBox.getPreferredSize());
 		content.add(urlBox);
@@ -56,10 +58,13 @@ public class URLSuggesterGUI {
 		
 		content.add(submit);
 		
-		suggestedURL = new JLabel("Suggested URL: ");
+		suggestedURLHeader = new JLabel("Suggested URL:");
+		suggestedURLHeader.setAlignmentX(Component.LEFT_ALIGNMENT);
+		content.add(suggestedURLHeader);
+		
+		suggestedURL = new JLabel(" ");
 		suggestedURL.setAlignmentX(Component.LEFT_ALIGNMENT);
 		content.add(suggestedURL);
-		
 		
 		//Display Window
 		frame.pack();
@@ -68,8 +73,26 @@ public class URLSuggesterGUI {
 	
 	// Action Methods
 		
-	public static void submitClicked(ActionEvent e){
-		suggestedURL.setText("Suggested URL: Submit Clicked");
+	public void submitClicked(ActionEvent e){
+		try{
+			submit.setEnabled(false);
+			frame.getRootPane().setCursor(new Cursor(Cursor.WAIT_CURSOR));
+			Histogram h = HistogramSimilarity.findMostSimilar(urlBox.getText(), URLSuggester.urlHistograms);
+			frame.getRootPane().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			submit.setEnabled(true);
+			String hURL = h.getURL().toString();
+			System.out.println(hURL);
+			suggestedURL.setForeground(Color.black);
+			suggestedURL.setText(hURL);
+			
+		}catch(URISyntaxException|IOException ex){
+			frame.getRootPane().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+			submit.setEnabled(true);
+			ex.printStackTrace();
+			suggestedURL.setForeground(Color.red);
+			suggestedURL.setText("Please input a valid URL.");
+			
+		}
 	}
 	
 }
