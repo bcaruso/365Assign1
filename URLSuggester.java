@@ -19,14 +19,13 @@ import java.net.*;
 public class URLSuggester {
 
 		public static ArrayList<Histogram> urlHistograms;
-		public static Histogram queryHistogram;
 	
 	
 		public static void main(String[] args) throws IOException, URISyntaxException{
 			
 			urlHistograms = new ArrayList<Histogram>();
 			
-			// Get initURLs File 
+			// Get Reference URL Files
 			File initURLs = new File(args[0]);
 			// Parse and create Histogram for each URL in File
 			
@@ -35,13 +34,25 @@ public class URLSuggester {
 				URL url = new URL(s.nextLine());
 				System.out.println(url.toString());
 				urlHistograms.add(URLHandler.createHistogram(url));
-				System.out.println(urlHistograms.size());
+				//urlHistograms.get(urlHistograms.size()-1).printOut();
 			}
 			
 			s.close();
 			
-			/*
-			// Initialize gui		
+			/* 
+			
+			// FOR TERMINAL TESTING 
+		
+			Scanner input = new Scanner(System.in);
+			String url = input.nextLine();
+			while( !url.equals("q")){
+				System.out.println(HistogramSimilarity.findMostSimilar(url, urlHistograms).getURL().toString());
+				url = input.nextLine();
+			}
+			
+			*/
+			
+			// Initialize gui	
 			URLSuggesterGUI gui = new URLSuggesterGUI();
 			
 			// Establish Event Dispatch Thread and Create GUI
@@ -50,8 +61,7 @@ public class URLSuggester {
 					gui.createGUI();
 				}
 			});
-			*/
 			
-		}	
+		}
 		
 }
