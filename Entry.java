@@ -40,8 +40,4 @@ public class Entry {
 		// Returns key
 		return key;
 	}
-	
-	public void setNext(Entry e){
-		 next = e;
-	}
 }
